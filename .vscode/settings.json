@@ -1,6 +1,6 @@
 {
     "sonarlint.connectedMode.project": {
-        "connectionId": "https://sonarcloud.io/project/we-go-jim-front",
+        "connectionId": "tandrian/project/we-go-jim-front",
         "projectKey": "TAndrian_we-go-jim-front"
     }
 }

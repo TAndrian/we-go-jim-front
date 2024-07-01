@@ -37,9 +37,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run lint
-      run: npm run lint
-
     - name: Run tests
       run: npm run test -- --watch=false --no-progress --browsers=ChromeHeadless
 

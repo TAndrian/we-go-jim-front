@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Booking } from '../model/booking';
 import { BookingApiService } from './booking-api.service';
 import { UserBookingHistory } from '../model/UserBookingHistory';

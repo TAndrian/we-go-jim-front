@@ -1,13 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookingComponent } from './booking.component';
-import { BookingService } from '../service/booking.service';
-import { MOCK_BOOKINGS, MOCK_JOHN_BOOKING_HISTORIES } from '../util/mock/BookingMocks';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { of } from 'rxjs';
-import { BookingApiService } from '../service/booking-api.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { JOHN_DOE_MOCK } from '../../user/util/UserMock';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { BookingApiService } from '../service/booking-api.service';
+import { BookingService } from '../service/booking.service';
+import { MOCK_BOOKINGS, MOCK_JOHN_BOOKING_HISTORIES } from '../util/mock/BookingMocks';
+import { BookingComponent } from './booking.component';
 
 describe('BookingComponent', () => {
   let component: BookingComponent;

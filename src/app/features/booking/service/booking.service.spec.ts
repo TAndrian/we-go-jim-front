@@ -2,10 +2,12 @@ import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BookingService } from './booking.service';
 import { BookingApiService } from './booking-api.service';
 import { of } from 'rxjs';
-import { MOCK_BOOKINGS } from '../util/mock/BookingMocks';
+import { MOCK_BOOKINGS, MOCK_JOHN_BOOKING_HISTORIES } from '../util/mock/BookingMocks';
 import { Booking } from '../model/booking';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { UserBookingHistory } from '../model/UserBookingHistory';
+import { JOHN_DOE_MOCK } from '../../user/util/UserMock';
 
 describe('BookingService', () => {
   let service: BookingService;
@@ -28,11 +30,7 @@ describe('BookingService', () => {
     // ARRANGE
     let result: Booking[] | undefined;
 
-    /* Mock BookingApiService to return MOCK_BOOKINGS then call loadBookings to
-     * to make it returns the MOCK_BOOKINGS
-     */
     spyOn(mockBookingApiService, 'getBookings').and.returnValue(of(MOCK_BOOKINGS));
-    service['loadBookings']();
     tick();
 
     // ACT
@@ -50,7 +48,6 @@ describe('BookingService', () => {
     let result: Booking[] | undefined;
 
     spyOn(mockBookingApiService, 'getBookings').and.returnValue(of([]));
-    service['loadBookings']();
     tick();
 
     // ACT
@@ -61,5 +58,25 @@ describe('BookingService', () => {
 
     // ASSERT
     expect(result).toEqual([]);
+  }));
+
+  it("should get user's booking history", fakeAsync(() => {
+    // ARRANGE
+    let result: UserBookingHistory[] | undefined;
+
+    spyOn(mockBookingApiService, 'getUserBookingHistories').and.returnValue(
+      of(MOCK_JOHN_BOOKING_HISTORIES)
+    );
+    tick();
+
+    // ACT
+    service
+      .getUserBookingHistories(JOHN_DOE_MOCK.id)
+      .subscribe((histories: UserBookingHistory[]) => {
+        result = histories;
+      });
+
+    // ASSERT
+    expect(result).toEqual(MOCK_JOHN_BOOKING_HISTORIES);
   }));
 });

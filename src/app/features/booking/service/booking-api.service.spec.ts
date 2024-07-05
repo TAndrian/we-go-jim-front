@@ -1,13 +1,12 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { HttpClient, HttpHeaders, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { BookingApiService } from './booking-api.service';
-import { MOCK_BOOKINGS } from '../util/mock/BookingMocks';
-import { API_BOOKINGS } from '../util/BookingResourcePath';
-import { Booking } from '../model/booking';
-import { ENVIRONMENT } from '../../../environments/environment';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { REQUEST_OPTIONS } from '../../../shared/utils/HttpHeaders';
+import { JOHN_DOE_MOCK } from '../../user/util/UserMock';
+import { UserBookingHistory } from '../model/UserBookingHistory';
+import { Booking } from '../model/booking';
+import { MOCK_BOOKINGS, MOCK_JOHN_BOOKING_HISTORIES } from '../util/mock/BookingMocks';
+import { BookingApiService } from './booking-api.service';
 
 describe('BookingApiService', () => {
   let service: BookingApiService;
@@ -56,5 +55,31 @@ describe('BookingApiService', () => {
       expect(bookings).toEqual([]);
     });
     tick();
+  }));
+
+  it("should call getUserBookingHistories and returns user's booking histories", fakeAsync(() => {
+    // ARRANGE
+    spyOn(httpClient, 'get').and.returnValues(of(MOCK_JOHN_BOOKING_HISTORIES));
+    tick();
+
+    // ACT
+    service
+      .getUserBookingHistories(JOHN_DOE_MOCK.id)
+      .subscribe((histories: UserBookingHistory[]) => {
+        expect(histories).toEqual(MOCK_JOHN_BOOKING_HISTORIES);
+      });
+  }));
+
+  it('should call getUserBookingHistories and returns empty collection', fakeAsync(() => {
+    // ARRANGE
+    spyOn(httpClient, 'get').and.returnValues(of([]));
+    tick();
+
+    // ACT
+    service
+      .getUserBookingHistories(JOHN_DOE_MOCK.id)
+      .subscribe((histories: UserBookingHistory[]) => {
+        expect(histories).toEqual([]);
+      });
   }));
 });

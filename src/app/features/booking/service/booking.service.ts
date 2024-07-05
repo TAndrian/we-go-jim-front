@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Booking } from '../model/booking';
 import { BookingApiService } from './booking-api.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class BookingService {
   private bookingsSubject: BehaviorSubject<Booking[]> = new BehaviorSubject<Booking[]>([]);
@@ -18,13 +19,12 @@ export class BookingService {
    * Load bookings and initialize bookings' initial values/
    */
   private loadBookings(): void {
-    this.bookingApiService.getBookings().subscribe((bookings) => {
+    this.bookingApiService.getBookings().subscribe((bookings: Booking[]) => {
       this.bookingsSubject.next(bookings);
     });
   }
 
   /**
-   *
    * @returns Observable of bookings fetched from the back-end service.
    */
   getBookings(): Observable<Booking[]> {

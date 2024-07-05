@@ -15,8 +15,8 @@ describe('BookingComponent', () => {
   let mockBookingApiService: jasmine.SpyObj<BookingApiService>;
 
   beforeEach(async () => {
-    const spyBookingService = jasmine.createSpyObj('BookingService', ['getBookings']);
-    const spyBookingApiService = jasmine.createSpyObj('BookingApiService', ['getBookings']);
+    const spyBookingService = jasmine.createSpyObj(BookingService, ['getBookings']);
+    const spyBookingApiService = jasmine.createSpyObj(BookingApiService, ['getBookings']);
 
     await TestBed.configureTestingModule({
       providers: [
@@ -24,11 +24,11 @@ describe('BookingComponent', () => {
         provideHttpClientTesting(),
         {
           provide: BookingService,
-          useuseValue: spyBookingService
+          useValue: spyBookingService
         },
         {
           provide: BookingApiService,
-          useuseValue: spyBookingApiService
+          useValue: spyBookingApiService
         }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -36,12 +36,15 @@ describe('BookingComponent', () => {
 
     mockBookingService = TestBed.inject(BookingService) as jasmine.SpyObj<BookingService>;
     mockBookingApiService = TestBed.inject(BookingApiService) as jasmine.SpyObj<BookingApiService>;
+
+    // ARRANGE
+    mockBookingService.getBookings.and.returnValue(of(MOCK_BOOKINGS));
+    mockBookingApiService.getBookings.and.returnValue(of(MOCK_BOOKINGS));
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BookingComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -49,12 +52,9 @@ describe('BookingComponent', () => {
   });
 
   it('should initialize bookings', () => {
-    // ARRANGE
-    spyOn(mockBookingApiService, 'getBookings').and.returnValue(of(MOCK_BOOKINGS));
-    spyOn(mockBookingService, 'getBookings').and.returnValue(of(MOCK_BOOKINGS));
-
     // ACT
     component.ngOnInit();
+    fixture.detectChanges();
 
     // ASSERT
     expect(component.bookings).toEqual(MOCK_BOOKINGS);

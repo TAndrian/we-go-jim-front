@@ -13,7 +13,7 @@ const CREATE_JANE_SMITH_MOCK: CreateUser = {
   firstName: 'Jane',
   lastName: 'Smith',
   email: 'jane.smith@test.com',
-  password: '123456'
+  password: ''
 };
 
 const JANE_SMITH_MOCK: User = {

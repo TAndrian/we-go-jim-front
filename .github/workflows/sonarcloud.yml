@@ -26,6 +26,12 @@ jobs:
 
       - name: Run tests
         run: npm test -- --code-coverage --watch=false --no-progress --browsers=ChromeHeadless
+        
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available.
 
       - name: Upload coverage to SonarCloud
         env:

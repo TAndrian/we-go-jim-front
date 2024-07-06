@@ -28,6 +28,7 @@ jobs:
         run: |
           npm test -- --code-coverage --watch=false --no-progress --browsers=ChromeHeadless
           if [ ! -f coverage/lcov.info ]; then
+            ls -l coverage
             echo "Failed to generate coverage report"
             exit 1
           fi

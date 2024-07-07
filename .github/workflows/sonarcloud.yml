@@ -27,7 +27,7 @@ jobs:
       - name: Run tests and generate coverage report
         run: |
           npm run lcov-report
-          if [ ! -f coverage/lcov.info ]; then
+          if [ ! -f coverage/we-go-jim-app/lcov.info ]; then
             ls -l coverage/we-go-jim-app
             echo "Failed to generate coverage report"
             exit 1

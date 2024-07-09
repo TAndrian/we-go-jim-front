@@ -3,6 +3,8 @@ import { BookingService } from '../service/booking.service';
 import { Booking } from '../model/booking';
 import { Subscription } from 'rxjs';
 import { UserBookingHistory } from '../model/UserBookingHistory';
+import { UserService } from '../../user/service/user.service';
+import { User } from '../../user/model/User';
 
 @Component({
   selector: 'app-booking',
@@ -16,11 +18,15 @@ export class BookingComponent {
   userBookingHistories: UserBookingHistory[] = [];
   subscription: Subscription = new Subscription();
 
-  constructor(private readonly _bookingService: BookingService) {}
+  constructor(
+    private readonly _bookingService: BookingService,
+    private readonly _userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.initializeBookings();
     this.initializeBookingHistory();
+    this.getUserById();
   }
 
   ngOnDestroy(): void {
@@ -44,6 +50,14 @@ export class BookingComponent {
       .getUserBookingHistories('8cfef374-700d-4d57-8fe8-688b976458e4')
       .subscribe((data: UserBookingHistory[]) => {
         this.userBookingHistories = data;
+      });
+  }
+
+  private getUserById(): void {
+    this.subscription = this._userService
+      .getUserById('8cfef374-700d-4d57-8fe8-688b976458e4')
+      .subscribe((user: User) => {
+        console.log({ user });
       });
   }
 }

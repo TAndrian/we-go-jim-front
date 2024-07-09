@@ -1,0 +1,12 @@
+<div class="sidebar glassify">
+    <div class=" sidebar__container">
+        <div class="sidebar__profile-section">
+            <app-avatar class="sidebar__avatar"></app-avatar>
+        </div>
+        <div class="spacer"></div>
+        <p-panelMenu class="sidebar__main-section " [model]="mainSections"></p-panelMenu>
+        <div class="spacer"></div>
+        <p-panelMenu class="sidebar__util-section " [model]="utilSections"></p-panelMenu>
+    </div>
+</div>
+<router-outlet></router-outlet>

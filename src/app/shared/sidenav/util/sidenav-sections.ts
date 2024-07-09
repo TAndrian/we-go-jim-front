@@ -5,12 +5,12 @@ export const SIDENAV__MAIN_SECTIONS: Array<SidenavSection> = [
   {
     label: 'Planing',
     icon: PrimeIcons.CALENDAR_PLUS,
-    routerLink: '/calendar'
+    routerLink: '/home/calendar'
   },
   {
     label: 'History',
     icon: PrimeIcons.HISTORY,
-    routerLink: '/history'
+    routerLink: '/home/history'
   }
 ];
 
@@ -18,7 +18,7 @@ export const SIDNAV_UTIL_SECTIONS: Array<SidenavSection> = [
   {
     label: 'Settings',
     icon: PrimeIcons.COG,
-    routerLink: '/settings'
+    routerLink: '/home/settings'
   },
   {
     label: 'Logout',

@@ -18,15 +18,18 @@
         width: 100%;
     }
 
+    &__main-section,
+    &__util-section {
+        @include flex-align(center, center);
+    }
+
     &__main-section {
         width: calc(100% - 10px);
         height: calc(50% - 30px);
-        @include flex-align(center, center);
     }
 
     &__util-section {
         width: calc(100% - 10px);
-        @include flex-align(center, center);
     }
 
     &__avatar {

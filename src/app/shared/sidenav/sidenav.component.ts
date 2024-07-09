@@ -5,11 +5,18 @@ import { MenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { AvatarModule } from 'primeng/avatar';
+import { CalendarSkeletonComponent } from '../skeleton/calendar/calendar-skeleton.component';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [RouterOutlet, PanelMenuModule, AvatarComponent, AvatarModule],
+  imports: [
+    RouterOutlet,
+    PanelMenuModule,
+    AvatarComponent,
+    AvatarModule,
+    CalendarSkeletonComponent
+  ],
   encapsulation: ViewEncapsulation.None,
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'

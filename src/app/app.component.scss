@@ -1,0 +1,5 @@
+.content-container {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px; /* Add padding as needed */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+}

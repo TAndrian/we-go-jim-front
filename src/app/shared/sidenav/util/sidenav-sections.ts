@@ -1,7 +1,7 @@
 import { SidenavSection } from '../model/sidenav-section';
 import { PrimeIcons } from 'primeng/api';
 
-export const SIDENAV__MAIN_SECTIONS: Array<SidenavSection> = [
+export const SIDENAV_MAIN_SECTIONS: Array<SidenavSection> = [
   {
     label: 'Planing',
     icon: PrimeIcons.CALENDAR_PLUS,

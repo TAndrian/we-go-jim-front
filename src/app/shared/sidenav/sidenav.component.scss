@@ -21,11 +21,20 @@
     &__main-section,
     &__util-section {
         @include flex-align(center, center);
-    }
 
-    &__main-section {
         width: calc(100% - 10px);
-        height: calc(50% - 30px);
+        font-size: 12pt;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        font-weight: bold;
+        padding: 10px;
+        margin-bottom: 15px;
+        column-gap: 10px;
+        background-color: black;
+        color: white;
+        &:hover {
+            background-color: rgba(179, 14, 14, 0.973);
+        }
     }
 
     &__util-section {
@@ -35,7 +44,9 @@
     &__avatar {
         width: 90px;
         height: 90px;
-        color: "#2a1261";
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 1px black;
         display: block;
         margin: 10px auto;
 
@@ -43,6 +54,7 @@
             user-select: none;
             width: 90px;
             height: 90px;
+            background-color: rgba(255, 0, 64, 0.849);
         }
         @include screen-x(599px) {
             width: 50px;
@@ -55,41 +67,7 @@
         }
     }
 
-    .p-component {
-        width: 100%;
-        padding: 5px;
-
-        @include screen-x(599px) {
-            @include flex-col(center, center);
-        }
-
-        .p-panelmenu-header-content {
-            border: none;
-            background-color: black;
-            border-radius: 5px;
-            &:hover {
-                background-color: rgba(36, 4, 151, 0.411);
-            }
-
-            @include screen-x(599px) {
-                background-color: transparent;
-            }
-        }
-    }
-
-    .p-panelmenu {
-        .p-menuitem-text {
-            color: white;
-            @include screen-x(599px) {
-                display: none;
-            }
-        }
-    }
-
-    .p-menuitem-icon {
-        color: white;
-        @include screen-x(599px) {
-            font-size: 18pt;
-        }
+    .active-link {
+        background-color: red;
     }
 }

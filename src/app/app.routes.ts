@@ -1,26 +1,23 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './layout/home/home.component';
-import { LoginComponent } from './features/authentication/login/login.component';
-import { CalendarSkeletonComponent } from './shared/skeleton/calendar/calendar-skeleton.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: () => {
-      return '/home/calendar';
+      return '/login';
     },
     pathMatch: 'full'
   },
   {
     path: 'home',
-    component: HomeComponent,
-    children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'calendar', component: CalendarSkeletonComponent }
-    ]
+    loadChildren: () => import('./layout/home/home-routes').then((m) => m.routes)
   },
   {
     path: 'login',
-    component: LoginComponent
+    loadChildren: () => import('./layout/login/login-routes').then((m) => m.routes)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./layout/register/register-routes').then((m) => m.routes)
   }
 ];

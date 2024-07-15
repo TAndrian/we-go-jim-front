@@ -25,7 +25,6 @@ export class BookingComponent {
 
   ngOnInit(): void {
     this.initializeBookings();
-    this.initializeBookingHistory();
     this.getUserById();
   }
 
@@ -42,16 +41,7 @@ export class BookingComponent {
     });
   }
 
-  /**
-   * Initialize user's booking histories.
-   */
-  private initializeBookingHistory(): void {
-    this.subscription = this._bookingService
-      .getUserBookingHistories('8cfef374-700d-4d57-8fe8-688b976458e4')
-      .subscribe((data: UserBookingHistory[]) => {
-        this.userBookingHistories = data;
-      });
-  }
+
 
   private getUserById(): void {
     this.subscription = this._userService

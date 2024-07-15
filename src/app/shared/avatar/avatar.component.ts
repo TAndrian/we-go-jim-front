@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AvatarModule } from 'primeng/avatar';
 
 @Component({
@@ -8,4 +8,6 @@ import { AvatarModule } from 'primeng/avatar';
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.scss'
 })
-export class AvatarComponent {}
+export class AvatarComponent {
+  @Input() label: string = '';
+}

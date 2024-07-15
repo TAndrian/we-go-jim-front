@@ -1,19 +1,19 @@
 <nav class="sidebar glassify">
     <div class=" sidebar__container">
         <div class="sidebar__profile-section">
-            <app-avatar class="sidebar__avatar"></app-avatar>
+            <app-avatar [label]="profileLabel" class="sidebar__avatar"></app-avatar>
         </div>
         <div class="spacer"></div>
-        <a class="sidebar__main-section" *ngFor="let item of mainSections" [routerLink]="item.routerLink"
+        <a class="sidebar__main-section glassify" *ngFor="let item of mainSections" [routerLink]="item.routerLink"
             routerLinkActive="active-link">
             <i [class]="item.icon"></i>
-            <span aria-label="main-section label">{{item.label}}</span>
+            <span aria-label="main-section">{{item.label}}</span>
         </a>
         <div class="spacer"></div>
-        <a class="sidebar__util-section" *ngFor="let item of utilSections" [routerLink]="item.routerLink"
+        <a class="sidebar__util-section glassify" *ngFor="let item of utilSections" [routerLink]="item.routerLink"
             routerLinkActive="active-link">
             <i [class]="item.icon"></i>
-            <span aria-label="main-section label">{{item.label}}</span>
+            <span aria-label="util-section">{{item.label}}</span>
         </a>
     </div>
 </nav>

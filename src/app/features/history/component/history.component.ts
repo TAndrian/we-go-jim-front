@@ -23,45 +23,6 @@ export class HistoryComponent {
 
   constructor(private readonly _historyService: HistoryService) {}
 
-  products = [
-    {
-      id: 1000,
-      name: 'James Butt',
-      country: {
-        name: 'Algeria',
-        code: 'dz'
-      },
-      company: 'Benton, John B Jr',
-      date: '2015-09-13',
-      status: 'unqualified',
-      verified: true,
-      activity: 17,
-      representative: {
-        name: 'Ioni Bowcher',
-        image: 'ionibowcher.png'
-      },
-      balance: 70663
-    },
-    {
-      id: 1001,
-      name: 'Josephine Darakjy',
-      country: {
-        name: 'Egypt',
-        code: 'eg'
-      },
-      company: 'Chanay, Jeffrey A Esq',
-      date: '2019-02-09',
-      status: 'proposal',
-      verified: true,
-      activity: 0,
-      representative: {
-        name: 'Amy Elsner',
-        image: 'amyelsner.png'
-      },
-      balance: 82429
-    }
-  ];
-
   ngOnInit(): void {
     this.initializeBookingHistory();
   }
@@ -71,7 +32,7 @@ export class HistoryComponent {
    */
   private initializeBookingHistory(): void {
     this.subscription = this._historyService
-      .getUserBookingHistories('8cfef374-700d-4d57-8fe8-688b976458e4')
+      .getUserBookingHistories('8eb67a46-a334-47ec-84d9-e3277c60d3b1')
       .subscribe((data: UserBookingHistory[]) => {
         this.userBookingHistories = data;
       });

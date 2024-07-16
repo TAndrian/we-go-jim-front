@@ -19,5 +19,6 @@ export const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./layout/register/register-routes').then((m) => m.routes)
-  }
+  },
+   { path: '**', redirectTo:()=> { return '/login'}, pathMatch: 'full' },
 ];

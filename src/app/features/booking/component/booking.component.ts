@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { BookingService } from '../service/booking.service';
-import { Booking } from '../model/booking';
 import { Subscription } from 'rxjs';
-import { UserBookingHistory } from '../model/UserBookingHistory';
-import { UserService } from '../../user/service/user.service';
 import { User } from '../../user/model/User';
+import { UserService } from '../../user/service/user.service';
+import { Booking } from '../model/booking';
+import { BookingService } from '../service/booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -15,7 +14,6 @@ import { User } from '../../user/model/User';
 })
 export class BookingComponent {
   bookings: Booking[] = [];
-  userBookingHistories: UserBookingHistory[] = [];
   subscription: Subscription = new Subscription();
 
   constructor(
@@ -47,7 +45,6 @@ export class BookingComponent {
     this.subscription = this._userService
       .getUserById('8cfef374-700d-4d57-8fe8-688b976458e4')
       .subscribe((user: User) => {
-        console.log({ user });
       });
   }
 }

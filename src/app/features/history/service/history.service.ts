@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { UserBookingHistory } from '../model/user-booking-history';
 import { HistoryApiService } from './history-api.service';
 
@@ -9,7 +9,7 @@ import { HistoryApiService } from './history-api.service';
 export class HistoryService {
   private userBookingHistoriesMap: Map<string, BehaviorSubject<UserBookingHistory[]>> = new Map();
 
-  constructor(private readonly _historyApiService:HistoryApiService) {}
+  constructor(private readonly _historyApiService: HistoryApiService) {}
 
   /**
    * Load user's booking histories based on the given userId.

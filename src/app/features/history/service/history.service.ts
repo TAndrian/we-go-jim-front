@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserBookingHistory } from '../model/user-booking-history';
-import { BookingApiService } from '../../booking/service/booking-api.service';
+import { HistoryApiService } from './history-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { BookingApiService } from '../../booking/service/booking-api.service';
 export class HistoryService {
   private userBookingHistoriesMap: Map<string, BehaviorSubject<UserBookingHistory[]>> = new Map();
 
-  constructor(private readonly _bookingApiService: BookingApiService) {}
+  constructor(private readonly _historyApiService:HistoryApiService) {}
 
   /**
    * Load user's booking histories based on the given userId.
@@ -22,7 +22,7 @@ export class HistoryService {
 
       this.userBookingHistoriesMap.set(userId, userBookingHistoriesSubject);
 
-      this._bookingApiService
+      this._historyApiService
         .getUserBookingHistories(userId)
         .subscribe((histories: UserBookingHistory[]) => {
           userBookingHistoriesSubject.next(histories);

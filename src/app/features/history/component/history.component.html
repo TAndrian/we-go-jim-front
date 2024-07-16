@@ -1,17 +1,17 @@
 <section class="history glassify">
     <h1 class="history__title"> Booking history: </h1>
     <div class="card">
-        <p-table [value]="products" [paginator]="true" [rows]="ROWS" [rowsPerPageOptions]="PAGINATOR">
+        <p-table [value]="userBookingHistories" [paginator]="true" [rows]="ROWS" [rowsPerPageOptions]="PAGINATOR">
             <ng-template pTemplate="header">
                 <tr>
                     <th *ngFor="let header of tableHeader" [id]="header.id">{{header.label}}</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-customer>
-                <tr>
-                    <td>{{ customer.name }}</td>
-                    <td>{{ customer.country.name }}</td>
-                    <td>{{ customer.company }}</td>
+            <ng-template pTemplate="body" let-history >
+                <tr >
+                    <td>{{ history.startTime | date:'fullDate' }}</td>
+                    <td>{{ history.startTime | date:'shortTime' }}</td>
+                    <td>{{ history.endTime | date:'shortTime' }}</td>
                 </tr>
             </ng-template>
         </p-table>

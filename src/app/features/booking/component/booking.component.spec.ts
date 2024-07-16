@@ -5,7 +5,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { BookingApiService } from '../service/booking-api.service';
 import { BookingService } from '../service/booking.service';
-import { MOCK_BOOKINGS, MOCK_JOHN_BOOKING_HISTORIES } from '../util/mock/BookingMocks';
+import { MOCK_BOOKINGS } from '../util/mock/BookingMocks';
 import { BookingComponent } from './booking.component';
 
 describe('BookingComponent', () => {
@@ -46,9 +46,6 @@ describe('BookingComponent', () => {
     // ARRANGE
     mockBookingService.getBookings.and.returnValue(of(MOCK_BOOKINGS));
     mockBookingApiService.getBookings.and.returnValue(of(MOCK_BOOKINGS));
-
-    mockBookingService.getUserBookingHistories.and.returnValue(of(MOCK_JOHN_BOOKING_HISTORIES));
-    mockBookingApiService.getUserBookingHistories.and.returnValue(of(MOCK_JOHN_BOOKING_HISTORIES));
   });
 
   beforeEach(() => {
@@ -67,6 +64,5 @@ describe('BookingComponent', () => {
 
     // ASSERT
     expect(component.bookings).toEqual(MOCK_BOOKINGS);
-    expect(component.userBookingHistories).toEqual(MOCK_JOHN_BOOKING_HISTORIES);
   });
 });

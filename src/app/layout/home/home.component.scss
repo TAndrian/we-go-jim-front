@@ -3,7 +3,7 @@
     height: 100vh;
     &__content {
         flex: 1; /* Take up the remaining space */
-        padding: 20px; /* Add padding as needed */
+        padding: 10px; /* Add padding as needed */
         overflow-y: auto; /* Enable scrolling if content overflows */
     }
 }

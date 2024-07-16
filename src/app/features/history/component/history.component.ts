@@ -1,11 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { TABLE_HEADER } from '../util/history-table-util';
-import { CommonModule } from '@angular/common';
-import { catchError, map, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { HistorySkeletonComponent } from '../../../shared/skeleton/history/history-skeleton.component';
 import { UserBookingHistory } from '../model/user-booking-history';
 import { HistoryService } from '../service/history.service';
-import { HistorySkeletonComponent } from '../../../shared/skeleton/history/history-skeleton.component';
+import { TABLE_HEADER } from '../util/history-table-util';
 
 @Component({
   selector: 'app-history',
@@ -37,12 +37,9 @@ export class HistoryComponent {
     this.isLoading = true;
     this.subscription = this._historyService
       .getUserBookingHistories('8eb67a46-a334-47ec-84d9-e3277c60d3b1')
-      .subscribe({
-        next: (data: UserBookingHistory[]) => {
-          this.userBookingHistories = data;
-          this.isLoading = false;
-        },
-        error: () => (this.isLoading = true)
+      .subscribe((data: UserBookingHistory[]) => {
+        this.userBookingHistories = data;
+        this.isLoading = false;
       });
   }
 }

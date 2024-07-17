@@ -1,8 +1,8 @@
 <section class="history glassify">
     <h1 class="history__title"> Booking history: </h1>
-    <div class="card">
+    <div class="history__card">
        <ng-container *ngIf="isLoading; else history">
-        <app-history-skeleton/>
+        <app-history-skeleton class="history__history-skeleton"/>
        </ng-container>
        <ng-template #history>
         <p-table [value]="userBookingHistories" [paginator]="true" [rows]="ROWS" [rowsPerPageOptions]="PAGINATOR">

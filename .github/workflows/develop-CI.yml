@@ -42,7 +42,7 @@ jobs:
           npm install
 
       - name: Print npm debug log
-        run: cat /home/runner/.npm/_logs/2024-07-18T14_27_48_365Z-debug-0.log
+        run: cat /home/runner/.npm/_logs/*.log
 
       - name: Run tests
         run: npm run test -- --watch=false --no-progress --browsers=ChromeHeadless

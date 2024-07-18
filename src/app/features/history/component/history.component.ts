@@ -33,7 +33,7 @@ export class HistoryComponent {
    */
   private initializeBookingHistory(): void {
     this.subscription = this._historyService
-      .getUserBookingHistories('8eb67a46-a334-47ec-84d9-e3277c60d3b1')
+      .getUserBookingHistories('8cfef374-700d-4d57-8fe8-688b976458e4')
       .subscribe((data: UserBookingHistory[]) => {
         this.userBookingHistories = data;
         this.isLoading = this._historyService.isLoading;

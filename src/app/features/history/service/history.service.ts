@@ -8,15 +8,16 @@ import { HistoryApiService } from './history-api.service';
   providedIn: 'root'
 })
 export class HistoryService {
+  constructor(private readonly _historyApiService: HistoryApiService) {}
+
   isLoading!: boolean;
 
   userBookingHistoriesSubject: BehaviorSubject<UserBookingHistory[]> = new BehaviorSubject<
     UserBookingHistory[]
   >([]);
-  constructor(private readonly _historyApiService: HistoryApiService) {}
 
   /**
-   * Load user's booking histories based on the given userId.
+   * Get user's booking histories based on the given userId.
    * @param userId user id.
    */
   getUserHistories$(userId: string): void {

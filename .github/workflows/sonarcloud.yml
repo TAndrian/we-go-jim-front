@@ -50,7 +50,7 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.tests=. \
             -Dsonar.test.inclusions="src/**/*.spec.ts" \
-            -Dsonar.exclusions="karma.conf.js, **/*.spec.ts, **/node_modules/**, **/coverage/**", **/*-routes.ts, **/app.routes.ts \
+            -Dsonar.exclusions="karma.conf.js, **/*.spec.ts, **/node_modules/**, **/coverage/**, **/*-routes.ts, **/.routes.ts" \
             -Dsonar.typescript.lcov.reportPaths=coverage/we-go-jim-app/lcov.info \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=${{ secrets.SONAR_CLOUD_TOKEN }}

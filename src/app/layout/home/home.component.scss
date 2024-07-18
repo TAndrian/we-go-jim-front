@@ -1,9 +1,10 @@
 .home-page {
-    display: flex;
-    height: 100vh;
-    &__content {
-        flex: 1; /* Take up the remaining space */
-        padding: 10px; /* Add padding as needed */
-        overflow-y: auto; /* Enable scrolling if content overflows */
-    }
+  display: flex;
+  height: 100vh;
+  &__content {
+    flex: 1; /* Take up the remaining space */
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    overflow-y: auto; /* Enable scrolling if content overflows */
+  }
 }

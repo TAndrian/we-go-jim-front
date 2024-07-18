@@ -1,5 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, retry } from 'rxjs';
 import { UserBookingHistory } from '../model/user-booking-history';
 import { HistoryApiService } from './history-api.service';
 
@@ -7,27 +8,34 @@ import { HistoryApiService } from './history-api.service';
   providedIn: 'root'
 })
 export class HistoryService {
-  private userBookingHistoriesMap: Map<string, BehaviorSubject<UserBookingHistory[]>> = new Map();
-
   constructor(private readonly _historyApiService: HistoryApiService) {}
 
+  isLoading!: boolean;
+
+  userBookingHistoriesSubject: BehaviorSubject<UserBookingHistory[]> = new BehaviorSubject<
+    UserBookingHistory[]
+  >([]);
+
   /**
-   * Load user's booking histories based on the given userId.
+   * Get user's booking histories based on the given userId.
    * @param userId user id.
    */
-  private loadUserBookingHistories(userId: string): void {
-    if (!this.userBookingHistoriesMap.has(userId)) {
-      const userBookingHistoriesSubject: BehaviorSubject<UserBookingHistory[]> =
-        new BehaviorSubject<UserBookingHistory[]>([]);
-
-      this.userBookingHistoriesMap.set(userId, userBookingHistoriesSubject);
-
-      this._historyApiService
-        .getUserBookingHistories(userId)
-        .subscribe((histories: UserBookingHistory[]) => {
-          userBookingHistoriesSubject.next(histories);
-        });
-    }
+  getUserHistories$(userId: string): void {
+    this.isLoading = true;
+    this._historyApiService
+      .getUserBookingHistories(userId)
+      .pipe(
+        retry(3),
+        catchError((error: HttpErrorResponse) => {
+          this.isLoading = true;
+          console.error(error);
+          return [];
+        })
+      )
+      .subscribe((data: UserBookingHistory[]) => {
+        this.isLoading = false;
+        this.userBookingHistoriesSubject.next(data);
+      });
   }
 
   /**
@@ -37,7 +45,7 @@ export class HistoryService {
    * @returns observable of array of UserBookingHistory.
    */
   getUserBookingHistories(userId: string): Observable<UserBookingHistory[]> {
-    this.loadUserBookingHistories(userId);
-    return this.userBookingHistoriesMap.get(userId)!.asObservable();
+    this.getUserHistories$(userId);
+    return this.userBookingHistoriesSubject.asObservable();
   }
 }

@@ -1,36 +1,39 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
-import { HistoryService } from './history.service';
-import { HistoryApiService } from './history-api.service';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { JOHN_DOE_MOCK } from '../../user/util/UserMock';
 import { UserBookingHistory } from '../model/user-booking-history';
 import { MOCK_JOHN_BOOKING_HISTORIES } from '../util/history-mock';
+import { HistoryApiService } from './history-api.service';
+import { HistoryService } from './history.service';
 
 describe('HistoryService', () => {
   let service: HistoryService;
-  let apiService:HistoryApiService;
-  
+  let spyApiService: HistoryApiService;
+  let spyHttpClient: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:[provideHttpClient(), provideHttpClientTesting(), HistoryApiService]
+      providers: [provideHttpClient(), provideHttpClientTesting(), HistoryApiService, HttpClient]
     });
     service = TestBed.inject(HistoryService);
-    apiService = TestBed.inject(HistoryApiService);
+    spyApiService = TestBed.inject(HistoryApiService);
+    spyHttpClient = TestBed.inject(HttpClient);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-   it("should get user's booking history", fakeAsync(() => {
+  it("should get user's booking history", fakeAsync(() => {
     // ARRANGE
     let result: UserBookingHistory[] | undefined;
 
-    spyOn(apiService, 'getUserBookingHistories').and.returnValue(of(MOCK_JOHN_BOOKING_HISTORIES))
+    spyOn(spyApiService, 'getUserBookingHistories').and.returnValue(
+      of(MOCK_JOHN_BOOKING_HISTORIES)
+    );
     tick();
 
     // ACT
@@ -42,5 +45,23 @@ describe('HistoryService', () => {
 
     // ASSERT
     expect(result).toEqual(MOCK_JOHN_BOOKING_HISTORIES);
+  }));
+
+  it('should catch HttpErrorResponse status 0', fakeAsync(() => {
+    // ARRANGE
+    let errorResponse: HttpErrorResponse = new HttpErrorResponse({
+      status: 0
+    });
+    spyOn(spyHttpClient, 'get').and.returnValue(throwError(() => errorResponse));
+
+    // ACT
+    service.getUserBookingHistories(JOHN_DOE_MOCK.id).subscribe({
+      error: (error: HttpErrorResponse) => {
+        expect(error.status).toEqual(errorResponse.status);
+      }
+    });
+
+    // ASSERT
+    expect(service.isLoading).toBeTrue();
   }));
 });

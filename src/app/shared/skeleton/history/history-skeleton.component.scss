@@ -1,0 +1,15 @@
+/* skeleton-table.component.scss */
+.skeleton-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skeleton-table th,
+.skeleton-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.skeleton-table th {
+  background-color: #f5f5f5;
+}

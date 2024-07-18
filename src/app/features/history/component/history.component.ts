@@ -20,9 +20,7 @@ export class HistoryComponent {
   ROWS: number = 5;
   PAGINATOR: Array<number> = [5, 10, 20];
   tableHeader = TABLE_HEADER;
-
   isLoading!: boolean;
-
   userBookingHistories: UserBookingHistory[] = [];
   subscription: Subscription = new Subscription();
 
@@ -34,12 +32,11 @@ export class HistoryComponent {
    * Initialize user's booking histories.
    */
   private initializeBookingHistory(): void {
-    this.isLoading = true;
     this.subscription = this._historyService
-      .getUserBookingHistories('8eb67a46-a334-47ec-84d9-e3277c60d3b1')
+      .getUserBookingHistories('8cfef374-700d-4d57-8fe8-688b976458e4')
       .subscribe((data: UserBookingHistory[]) => {
         this.userBookingHistories = data;
-        this.isLoading = false;
+        this.isLoading = this._historyService.isLoading;
       });
   }
 }

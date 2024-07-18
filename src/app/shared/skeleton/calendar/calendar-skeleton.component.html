@@ -1,54 +1,8 @@
-<main>
-    <div class="skeleton-list">
-        <div class="skeleton-list__block skeleton-list__title"></div>
+<!-- skeleton-calendar.component.html -->
+<div class="skeleton-calendar">
+    <ngx-skeleton-loader class="skeleton-calendar__cirle" count="1" appearance="circle"
+        [theme]="{ 'width': '40px', 'height': '40px' }"></ngx-skeleton-loader>
 
-        <div class="skeleton-list__row skeleton-list__calendar-header">
-            <div class="skeleton-list__row skeleton-list__buttons">
-                <div class="skeleton-list__block skeleton-list__prev"></div>
-                <div class="skeleton-list__block skeleton-list__next"></div>
-            </div>
-            <div class="skeleton-list__buttons">
-                <div class="skeleton-list__block skeleton-list__week"></div>
-            </div>
-        </div>
-
-        <div class="skeleton-list__block skeleton-list__block--grid">
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-        </div>
-
-        <div class="skeleton-list__block skeleton-list__block--grid">
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-        </div>
-
-        <div class="skeleton-list__block skeleton-list__block--grid">
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-        </div>
-
-        <div class="skeleton-list__block skeleton-list__block--grid">
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-        </div>
-        <div class="skeleton-list__block skeleton-list__block--grid">
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-            <div class="skeleton-list__inner-square"></div>
-        </div>
-    </div>
-</main>
+    <ngx-skeleton-loader count="5" appearance="line"
+        [theme]="{ 'height': '80px', 'margin-bottom': '5px' }"></ngx-skeleton-loader>
+</div>

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [22.3.0]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -22,7 +22,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
 
       - name: Run tests and generate coverage report
         run: |
@@ -49,7 +50,7 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.tests=. \
             -Dsonar.test.inclusions="src/**/*.spec.ts" \
-            -Dsonar.exclusions="karma.conf.js, **/*.spec.ts, **/node_modules/**, **/coverage/**" \
+            -Dsonar.exclusions="karma.conf.js, **/*.spec.ts, **/node_modules/**, **/coverage/**, **/*-routes.ts, **/*.routes.ts, **/main.ts" \
             -Dsonar.typescript.lcov.reportPaths=coverage/we-go-jim-app/lcov.info \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=${{ secrets.SONAR_CLOUD_TOKEN }}

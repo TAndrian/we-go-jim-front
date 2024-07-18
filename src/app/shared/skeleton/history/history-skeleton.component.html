@@ -1,0 +1,23 @@
+<!-- skeleton-table.component.html -->
+<table class="skeleton-table">
+  <thead>
+    <tr>
+      <th><ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{ 'height': '20px', 'width': '100%' }"></ngx-skeleton-loader></th>
+      <th><ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{ 'height': '20px', 'width': '100%' }"></ngx-skeleton-loader></th>
+      <th><ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{ 'height': '20px', 'width': '100%' }"></ngx-skeleton-loader></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of [1, 2, 3, 4, 5]">
+      <td><ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{ 'height': '20px', 'width': '100%' }"></ngx-skeleton-loader></td>
+      <td><ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{ 'height': '20px', 'width': '100%' }"></ngx-skeleton-loader></td>
+      <td><ngx-skeleton-loader count="1" appearance="line"
+          [theme]="{ 'height': '20px', 'width': '100%' }"></ngx-skeleton-loader></td>
+    </tr>
+  </tbody>
+</table>

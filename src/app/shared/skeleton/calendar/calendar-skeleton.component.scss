@@ -1,0 +1,10 @@
+@import "../../style/mixins.scss";
+/* skeleton-calendar.component.scss */
+.skeleton-calendar {
+    @include flex-col(center, center);
+    padding: 10px;
+}
+
+.skeleton-calendar ngx-skeleton-loader {
+    width: 100%;
+}

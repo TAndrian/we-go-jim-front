@@ -1,0 +1,11 @@
+.bookings {
+    width: 100%;
+    &__title {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+    &__calendar {
+        background-color: aliceblue;
+        padding: 20px 10px 20px 15px;
+    }
+}

@@ -1,1 +1,12 @@
-<p>booking works!</p>
+<section class="bookings glassify">
+    <h1 class="bookings__title">Workout plannings: </h1>
+
+    <div class="bookings__calendar">
+        <full-calendar [classList]="" [options]="calendarOptions">
+            <ng-template #eventContent let-arg>
+                <b>{{arg.timeText}}</b>
+                <i>{{arg.event.title}}</i>
+            </ng-template>
+        </full-calendar>
+    </div>
+</section>

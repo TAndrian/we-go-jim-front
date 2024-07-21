@@ -3,7 +3,7 @@ import { PrimeIcons } from 'primeng/api';
 
 export const SIDENAV_MAIN_SECTIONS: Array<SidenavSection> = [
   {
-    label: 'Planing',
+    label: 'Planning',
     icon: PrimeIcons.CALENDAR_PLUS,
     routerLink: '/home/calendar'
   },

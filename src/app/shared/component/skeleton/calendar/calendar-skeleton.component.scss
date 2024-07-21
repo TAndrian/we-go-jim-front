@@ -1,4 +1,4 @@
-@import "../../style/mixins.scss";
+@import'../../../style/mixins.scss';
 /* skeleton-calendar.component.scss */
 .skeleton-calendar {
     @include flex-col(center, center);

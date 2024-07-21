@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { Subscription } from 'rxjs';
-import { HistorySkeletonComponent } from '../../../shared/skeleton/history/history-skeleton.component';
 import { UserBookingHistory } from '../model/user-booking-history';
 import { HistoryService } from '../service/history.service';
 import { TABLE_HEADER } from '../util/history-table-util';
+import { HistorySkeletonComponent } from '../../../shared/component/skeleton/history/history-skeleton.component';
 
 @Component({
   selector: 'app-history',

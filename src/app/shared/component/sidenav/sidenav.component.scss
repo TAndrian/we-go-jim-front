@@ -1,5 +1,5 @@
-@import "../style/mixins.scss";
-@import "../style/common.scss";
+@import "../../style/mixins.scss";
+@import "../../style/common.scss";
 .sidebar {
     width: 150px;
     @include screen-x(599px) {

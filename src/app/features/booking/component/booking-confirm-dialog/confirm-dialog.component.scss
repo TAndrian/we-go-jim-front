@@ -1,0 +1,5 @@
+@import "../../../../shared/style/mixins.scss";
+.confirm-dialog-footer {
+    @include flex-row(flex-end, flex-end);
+    column-gap: 15px;
+}

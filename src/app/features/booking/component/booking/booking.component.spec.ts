@@ -3,9 +3,9 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BookingApiService } from '../service/booking-api.service';
-import { BookingService } from '../service/booking.service';
-import { MOCK_BOOKINGS } from '../util/mock/BookingMocks';
+import { BookingApiService } from '../../service/booking-api.service';
+import { BookingService } from '../../service/booking.service';
+import { MOCK_BOOKINGS } from '../../util/mock/BookingMocks';
 import { BookingComponent } from './booking.component';
 
 describe('BookingComponent', () => {

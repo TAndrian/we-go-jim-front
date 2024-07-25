@@ -1,0 +1,7 @@
+@import "../../../../shared/style/mixins.scss";
+.booking-event-dialog {
+    &__button {
+        @include flex-row(flex-end, flex-end);
+        column-gap: 10px;
+    }
+}

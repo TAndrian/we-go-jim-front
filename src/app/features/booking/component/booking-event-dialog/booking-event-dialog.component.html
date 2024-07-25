@@ -1,0 +1,11 @@
+<div class="booking-event-dialog">
+    <p>Title: {{ event.title }}</p>
+    <p>Start: {{ event.start }}</p>
+    <p>End: {{ event.end }}</p>
+
+    <div class="booking-event-dialog__button">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-secondary"
+            (click)="onClose()"></button>
+        <button pButton pRipple label="Book slot" icon="pi pi-check" class="p-button-success" (click)="handleBookSlot()"></button>
+    </div>
+</div>

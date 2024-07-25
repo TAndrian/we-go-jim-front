@@ -6,18 +6,21 @@ import { EventImpl } from '@fullcalendar/core/internal';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { isBefore } from 'date-fns';
+import { add, addMinutes, isBefore } from 'date-fns';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Booking } from '../../model/booking';
 import { BookingEvents } from '../../model/booking-events';
 import {
   AVAILABLE_SLOT_STYLE,
+  DATE_FORMAT,
   EXPIRED_SLOT_STYLE,
   MAX_PARTICIPANT,
   UNAVAILABLE_SLOT_STYLE
 } from '../../util/booking-calendar-variables';
 import { ConfirmDialogComponent } from '../booking-confirm-dialog/confirm-dialog.component';
 import { BookingEventDialogComponent } from '../booking-event-dialog/booking-event-dialog.component';
+import { Subscription } from 'rxjs';
+import { BookingService } from '../../service/booking.service';
 
 const newEvent: BookingEvents = {
   title: 'Test',
@@ -38,12 +41,15 @@ export class BookingCalendarComponent {
     private datePipe: DatePipe,
     private elementRef: ElementRef,
     private changeDetectorRef: ChangeDetectorRef,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private readonly _bookingService: BookingService
   ) {}
+
+  subscription: Subscription = new Subscription();
 
   ref: DynamicDialogRef | undefined;
 
-  @Input() bookings: Booking[] = [];
+  bookings: Booking[] = [];
 
   // references the #calendar in the template
   @ViewChild('calendar')
@@ -78,8 +84,22 @@ export class BookingCalendarComponent {
   };
 
   ngOnInit(): void {
-    this.calendarOptions.events = this.bookings.map(this.mapBookingToEvent);
-    console.log(this.bookings);
+    this.initializeBookings();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  /**
+   * Initialize bookings to display on the scheduler.
+   */
+  private initializeBookings(): void {
+    let bookingSubscription = this._bookingService.getBookings().subscribe((data: Booking[]) => {
+      this.bookings = data;
+      this.calendarOptions.events = data.map((booking: Booking) => this.mapBookingToEvent(booking));
+    });
+    this.subscription.add(bookingSubscription);
   }
 
   /**
@@ -135,13 +155,16 @@ export class BookingCalendarComponent {
    * Handle dateClicked from calendar.
    */
   private handleDateClick(arg: DateClickArg): void {
-    const clickedDate = new Date(arg.dateStr);
+    const clickedDate = new Date(arg.date);
+
     const now = new Date();
 
     if (isBefore(clickedDate, now)) {
       alert('Selected date is in the past and cannot be selected.');
     } else {
-      this.showConfirmDialog(arg.dateStr);
+      let start = clickedDate;
+      let end = addMinutes(start, 30);
+      this.showConfirmDialog(start, end);
     }
   }
 
@@ -149,19 +172,20 @@ export class BookingCalendarComponent {
    * Show confirm dialog when date is clicked.
    * @param dateStr Date clicked on calendar.
    */
-  private showConfirmDialog(dateStr: string): void {
+  private showConfirmDialog(start: Date, end: Date): void {
     this.ref = this.dialogService.open(ConfirmDialogComponent, {
       header: 'Confirm schedule booking',
       width: '500px',
       data: {
-        date: dateStr
+        start: this.datePipe.transform(start, DATE_FORMAT),
+        end: this.datePipe.transform(end, DATE_FORMAT)
       }
     });
 
     this.ref.onClose.subscribe((confirmed: boolean) => {
       if (confirmed) {
         // Handle event creation logic here
-        alert('Event will be created on: ' + dateStr);
+        alert('Event will be created on: ' + start + ' - ' + end);
       }
     });
   }
@@ -185,8 +209,8 @@ export class BookingCalendarComponent {
       width: '500px',
       data: {
         title: event.title,
-        start: this.datePipe.transform(event.start, 'yyyy-MM-dd HH:mm'),
-        end: this.datePipe.transform(event.end, 'yyyy-MM-dd HH:mm')
+        start: this.datePipe.transform(event.start, DATE_FORMAT),
+        end: this.datePipe.transform(event.end, DATE_FORMAT)
       }
     });
   }

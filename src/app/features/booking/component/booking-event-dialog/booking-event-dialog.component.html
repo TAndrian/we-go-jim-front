@@ -6,6 +6,6 @@
     <div class="booking-event-dialog__button">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-secondary"
             (click)="onClose()"></button>
-        <button pButton pRipple label="Book slot" icon="pi pi-check" class="p-button-success" (click)="handleBookSlot()"></button>
+        <button pButton pRipple label="Book slot" icon="pi pi-check" class="p-button-success" [disabled]="isPastToday()" (click)="handleSlotReservationRequest()"></button>
     </div>
 </div>

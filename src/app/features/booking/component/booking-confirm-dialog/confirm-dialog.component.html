@@ -1,6 +1,7 @@
-<p>Do you want to create an event on {{data.date}}?</p>
+<p>Would you like to confirm your reservation on : </p>
+<p>{{messageConfirmation}} ?</p>
 <p-footer class="confirm-dialog-footer">
     <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-secondary"
         (click)="ref.close(false)"></button>
-    <button pButton pRipple label="Submit" icon="pi pi-check" class="p-button-success" (click)="confirm()"></button>
+    <button pButton pRipple label="Confirm" icon="pi pi-check" class="p-button-success" (click)="confirm()"></button>
 </p-footer>
